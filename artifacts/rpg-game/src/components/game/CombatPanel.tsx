@@ -7,7 +7,7 @@ import { Sword, Shield, Zap, Skull, HeartPulse, Footprints } from 'lucide-react'
 import { Button } from '@/components/ui/button';
 
 export function CombatPanel() {
-  const { player, combat, attack, useSkill, flee, processVictory } = useGameStore();
+  const { player, combat, progression, attack, useSkill, flee, processVictory } = useGameStore();
   const derivedStats = useDerivedStats();
 
   if (!player || !combat.enemy) {
@@ -15,7 +15,7 @@ export function CombatPanel() {
       <div className="h-full w-full flex flex-col items-center justify-center panel-border rounded-xl p-8 bg-[url('/images/bg-castle.png')] bg-cover bg-center relative">
         <div className="absolute inset-0 bg-black/70 rounded-xl" />
         <div className="relative z-10 text-center space-y-6">
-          <h2 className="text-3xl font-display text-accent text-glow">Dungeon Floor {useGameStore(s=>s.progression.floor)}</h2>
+          <h2 className="text-3xl font-display text-accent text-glow">Dungeon Floor {progression.floor}</h2>
           <p className="text-muted-foreground">The shadows are quiet... for now.</p>
           <Button 
             size="lg" 
