@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Cinzel Decorative', cursive;
+
+  /* Dark Fantasy Palette */
+  --color-background: hsl(240 10% 4%);
+  --color-foreground: hsl(0 0% 95%);
+  
+  --color-card: hsl(240 10% 6%);
+  --color-card-foreground: hsl(0 0% 95%);
+  
+  --color-popover: hsl(240 10% 6%);
+  --color-popover-foreground: hsl(0 0% 95%);
+  
+  --color-primary: hsl(0 80% 50%); /* Crimson Red */
+  --color-primary-foreground: hsl(0 0% 100%);
+  
+  --color-secondary: hsl(240 15% 15%);
+  --color-secondary-foreground: hsl(0 0% 95%);
+  
+  --color-muted: hsl(240 10% 12%);
+  --color-muted-foreground: hsl(240 5% 65%);
+  
+  --color-accent: hsl(45 90% 50%); /* Gold/Yellow */
+  --color-accent-foreground: hsl(240 10% 4%);
+  
+  --color-destructive: hsl(0 84% 40%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  
+  --color-border: hsl(240 10% 15%);
+  --color-input: hsl(240 10% 15%);
+  --color-ring: hsl(0 80% 50%);
+
+  --color-health: hsl(350 80% 45%);
+  --color-mana: hsl(220 80% 55%);
+  --color-xp: hsl(280 80% 60%);
+  --color-gold: hsl(45 90% 50%);
+
+  /* Rarity Colors */
+  --color-rarity-common: hsl(0 0% 70%);
+  --color-rarity-uncommon: hsl(120 60% 50%);
+  --color-rarity-rare: hsl(210 80% 60%);
+  --color-rarity-epic: hsl(280 70% 60%);
+  --color-rarity-legendary: hsl(35 90% 55%);
+}
+
+:root {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 95%;
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 95%;
+  --border: 240 10% 15%;
+  --primary: 0 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 240 10% 12%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 45 90% 50%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased overflow-hidden selection:bg-primary/30;
+    /* Moody vignette overlay */
+    background-image: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-wider;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+  .box-glow {
+    box-shadow: 0 0 15px currentColor;
+  }
+  .panel-border {
+    @apply border border-border bg-card/80 backdrop-blur-md shadow-2xl;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Scrollbar for game logs */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(240 10% 6%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(240 10% 20%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(240 10% 30%);
+}
+
+/* Scanline effect for retro/gritty feel */
+.scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 50;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}

@@ -1,15 +1,16 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Dark Realm RPG API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: game
+    description: Game save operations
 paths:
   /healthz:
     get:
@@ -24,6 +25,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /game/save:
+    post:
+      operationId: saveGame
+      tags: [game]
+      summary: Save game state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveGameRequest"
+      responses:
+        "200":
+          description: Game saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveGameResponse"
+  /game/load:
+    get:
+      operationId: loadGame
+      tags: [game]
+      summary: Load game state
+      parameters:
+        - name: playerId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Game state loaded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoadGameResponse"
+  /game/leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [game]
+      summary: Get top players leaderboard
+      responses:
+        "200":
+          description: Leaderboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaderboardResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +82,68 @@ components:
           type: string
       required:
         - status
-
+    SaveGameRequest:
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        gameState:
+          type: string
+          description: JSON-serialized game state
+      required:
+        - playerId
+        - playerName
+        - gameState
+    SaveGameResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        savedAt:
+          type: string
+      required:
+        - success
+        - savedAt
+    LoadGameResponse:
+      type: object
+      properties:
+        found:
+          type: boolean
+        playerName:
+          type: string
+        gameState:
+          type: string
+        savedAt:
+          type: string
+      required:
+        - found
+    LeaderboardEntry:
+      type: object
+      properties:
+        rank:
+          type: integer
+        playerName:
+          type: string
+        level:
+          type: integer
+        dungeonFloor:
+          type: integer
+        totalKills:
+          type: integer
+      required:
+        - rank
+        - playerName
+        - level
+        - dungeonFloor
+        - totalKills
+    LeaderboardResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/LeaderboardEntry"
+      required:
+        - entries

@@ -1,0 +1,35 @@
+packages:
+  "framer-motion": "For smooth animations of HP bars, combat effects, and screen transitions"
+  "zustand": "For complex offline-first game state management"
+  "lucide-react": "Icons for UI"
+  "clsx": "Utility for constructing className strings"
+  "tailwind-merge": "Utility for merging tailwind classes"
+  "uuid": "Generating unique item IDs"
+
+images:
+  - path: "artifacts/rpg-game/public/images/bg-castle.png"
+    description: "Dark fantasy medieval castle interior, dimly lit with torches, deep shadows, gothic architecture, moody atmosphere"
+    aspect_ratio: "16:9"
+  - path: "artifacts/rpg-game/public/images/bg-forest.png"
+    description: "Dark cursed forest at night, twisted trees, glowing purple mist, eerie atmosphere"
+    aspect_ratio: "16:9"
+  - path: "artifacts/rpg-game/public/images/bg-volcano.png"
+    description: "Underground volcanic cavern, flowing lava rivers, dark obsidian rocks, red glow"
+    aspect_ratio: "16:9"
+  - path: "artifacts/rpg-game/public/images/class-warrior.png"
+    description: "Portrait of a dark fantasy heavily armored warrior, battle-worn, glowing red eyes, dramatic lighting"
+    aspect_ratio: "1:1"
+  - path: "artifacts/rpg-game/public/images/class-mage.png"
+    description: "Portrait of a dark fantasy mage, hooded robes, glowing blue arcane magic in hands, mysterious"
+    aspect_ratio: "1:1"
+  - path: "artifacts/rpg-game/public/images/class-rogue.png"
+    description: "Portrait of a dark fantasy rogue assassin, face half hidden by shadow, dual poison daggers, green accent lighting"
+    aspect_ratio: "1:1"
+  - path: "artifacts/rpg-game/public/images/class-ranger.png"
+    description: "Portrait of a dark fantasy ranger, drawn bow, leather armor, forest shadow background, piercing gaze"
+    aspect_ratio: "1:1"
+
+notes:
+  - Using Zustand for primary game state to allow offline play.
+  - API calls to @workspace/api-client-react are used for persistent cloud saves and leaderboards.
+  - The game is completely playable without network connectivity until the user attempts to Save/Load to cloud.

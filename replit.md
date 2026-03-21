@@ -48,6 +48,25 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `pnpm run build` — runs `typecheck` first, then recursively runs `build` in all packages that define it
 - `pnpm run typecheck` — runs `tsc --build --emitDeclarationOnly` using project references
 
+## Artifacts
+
+### `artifacts/rpg-game` (`@workspace/rpg-game`)
+
+Dark Realm RPG — A full-featured browser RPG game. React + Vite frontend with Zustand state management, Framer Motion animations. Served at `/`.
+
+Features:
+- Character creation (Warrior, Mage, Rogue, Ranger classes)
+- Turn-based combat with dungeon exploration
+- 4 unique skills per class with mana/cooldowns
+- Inventory system with equipment slots and item rarities
+- Shop for potions and gear
+- Zone progression (Forest → Dungeon → Volcano → Dark Realm)
+- XP/leveling with stat point allocation
+- Daily quests and achievements
+- Prestige/ascension system at level 50
+- Save/load via backend API + localStorage
+- Leaderboard with Hall of Heroes
+
 ## Packages
 
 ### `artifacts/api-server` (`@workspace/api-server`)
