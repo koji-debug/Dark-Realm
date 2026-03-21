@@ -4,12 +4,14 @@ import { ScrollText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LOG_COLORS = {
-  'damage': 'text-red-400 font-semibold',
-  'heal': 'text-green-400 font-semibold',
-  'system': 'text-zinc-400 italic',
-  'loot': 'text-accent font-bold',
-  'enemy-damage': 'text-red-600 font-bold',
+const LOG_COLORS: Record<string, string> = {
+  'damage':       'text-red-400 font-semibold',
+  'crit':         'text-yellow-300 font-bold',
+  'heal':         'text-green-400 font-semibold',
+  'system':       'text-zinc-400 italic',
+  'loot':         'text-orange-400 font-bold',
+  'enemy-damage': 'text-red-500 font-bold',
+  'boss':         'text-purple-400 font-bold italic',
 };
 
 export function CombatLogPanel() {

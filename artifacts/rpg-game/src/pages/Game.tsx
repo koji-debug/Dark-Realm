@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGameStore } from '@/lib/game-store';
 import { PlayerSidebar } from '@/components/game/PlayerSidebar';
 import { CombatPanel } from '@/components/game/CombatPanel';
@@ -6,20 +6,21 @@ import { InventoryPanel } from '@/components/game/InventoryPanel';
 import { CombatLogPanel } from '@/components/game/CombatLogPanel';
 import { useCloudSave } from '@/hooks/use-api';
 import { Button } from '@/components/ui/button';
-import { LogOut, Save, Settings } from 'lucide-react';
+import { LogOut, Save } from 'lucide-react';
 import { useLocation } from 'wouter';
 
 export default function GamePage() {
-  const { player } = useGameStore();
+  const { player, combat } = useGameStore();
   const [, setLocation] = useLocation();
   const saveMutation = useCloudSave();
   
   const [activeTab, setActiveTab] = useState<'inventory' | 'shop'>('inventory');
 
-  if (!player) {
-    setLocation('/');
-    return null;
-  }
+  useEffect(() => {
+    if (!player) setLocation('/');
+  }, [player]);
+
+  if (!player) return null;
 
   return (
     <div className="h-screen w-full flex flex-col p-2 md:p-4 gap-4 max-w-[1600px] mx-auto">
@@ -73,7 +74,7 @@ export default function GamePage() {
               variant={activeTab === 'shop' ? 'default' : 'outline'} 
               className={activeTab === 'shop' ? 'bg-zinc-800 text-white border-zinc-700' : 'border-zinc-800 text-zinc-400'}
               onClick={() => setActiveTab('shop')}
-              disabled={useGameStore(s => s.combat.inCombat)}
+              disabled={combat.inCombat}
             >
               Merchant
             </Button>
