@@ -10,7 +10,6 @@ const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) throw new Error(`Invalid PORT value: "${rawPort}"`);
 
 const basePath = process.env.BASE_PATH ?? "/";
-
 const workspaceRoot = path.resolve(import.meta.dirname, "../..");
 
 export default defineConfig({
